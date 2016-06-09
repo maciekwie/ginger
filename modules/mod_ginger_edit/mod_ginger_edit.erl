@@ -19,10 +19,14 @@ is_authorized(ReqData, Context) ->
 
 %% overrule van mod_admin om de connect lijst naar andere template te laten renderen    
 event(#postback_notify{message="feedback", trigger="dialog-connect-find", target=TargetId}, Context) ->
-                                                % Find pages matching the search criteria.
+    % Find pages matching the search criteria.
     SubjectId = z_convert:to_integer(z_context:get_q(subject_id, Context)),
     Category = z_context:get_q(find_category, Context),
     Text=z_context:get_q(find_text, Context),
+    Filter = z_context:get_q(filter, Context),
+    CatExclude = z_context:get_q(cat_exclude, Context),
+    %?DEBUG(Filter),
+    %?DEBUG(CatExclude),
     Cats = case Category of
                 "p:"++Predicate -> m_predicate:object_category(Predicate, Context);
                 "" -> [];
@@ -31,11 +35,13 @@ event(#postback_notify{message="feedback", trigger="dialog-connect-find", target
     Vars = [
         {subject_id, SubjectId},
         {cat, Cats},
-        {text, Text}
+        {text, Text},
+        {filter, Filter},
+        {cat_exclude, CatExclude}
     ],
     z_render:wire([
         {remove_class, [{target, TargetId}, {class, "loading"}]},
-        {update, [{target, TargetId}, {template, "_action_dialog_connect_tab_find_results.tpl"} | Vars]}
+        {update, [{target, TargetId}, {template, "_action_ginger_dialog_connect_tab_find_results.tpl"} | Vars]}
     ], Context);
 
 %% @doc Custom version of controller_admin_edit rscform that executes actions instead of redirecting

@@ -6,6 +6,8 @@
 		<input type="hidden" name="subject_id" value="{{ subject_id }}" />
         <input type="hidden" name="object_id" value="{{ object_id }}" />
 		<input type="hidden" name="predicate" value="{{ predicate|default:'' }}" />
+		<input type="hidden" name="filter" value="{{ filter|default:'' }}" />
+		<input type="hidden" name="cat_exclude" value="{{ cat_exclude|default:'' }}" />
         <div class="col-md-8">
 		    <input name="find_text" type="text" value="" placeholder="{_ Type text to search _}" class="do_autofocus form-control" />
         </div>
@@ -17,7 +19,7 @@
 	</form>
 
 	<div id="dialog-connect-found" class="do_feedback"
-		data-feedback="trigger: 'dialog-connect-find', delegate: 'mod_admin'">
+		data-feedback="trigger: 'dialog-connect-find', delegate: 'mod_ginger_edit'">
 	</div>
     <div class="modal-footer">
         <a class="btn btn-default" id="{{ #close }}">
@@ -29,7 +31,7 @@
 </div>
 {% wire name="dialog_connect_find"
     action={postback
-        delegate=delegate|default:"mod_admin"
+        delegate=delegate|default:"mod_ginger_edit"
         postback={admin_connect_select
             id=id
             subject_id=subject_id

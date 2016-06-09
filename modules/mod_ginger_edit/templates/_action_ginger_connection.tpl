@@ -26,6 +26,8 @@
                             objects=objects
                             add_author=add_author
                             cat=cat_id
+                            cat_exclude=cat_exclude
+                            filter=filter
                             tabs_enabled=tabs_enabled
                             callback=callback
                             predicate=predicate
@@ -44,6 +46,8 @@
                             objects=objects
                             add_author=add_author
                             cat=cat_id
+                            cat_exclude=cat_exclude
+                            filter=filter
                             tabs_enabled=tabs_enabled
                             callback=callback
                             predicate=predicate

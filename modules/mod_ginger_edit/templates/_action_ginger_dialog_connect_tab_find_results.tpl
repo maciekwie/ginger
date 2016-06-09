@@ -1,12 +1,20 @@
-<div id="dialog-connect-results">
-    {% with m.search.paged[{query text=text filter=[ "creator_id", m.acl.user ] cat=cat page=1 pagelen=20}] as result %}
-		{% include "_action_dialog_connect_tab_find_results_loop.tpl" id result=result %}
-
-	    {% lazy action={moreresults result=result target="dialog-connect-results-ul" 
-				template="_action_ginger_dialog_connect_tab_find_results_loop.tpl"
+<div id="dialog_connect_results" class="connect-results">
+    {% with m.search.paged[{fulltext text=text cat=cat page=1 pagelen=(6*3)}] as result %}
+        <div id="dialog_connect_loop_results" class="thumbnails">
+            {% include "_action_dialog_connect_tab_find_results_loop.tpl"
+                id
+                result=result
+            %}
+        </div>
+	    {% lazy
+	        action={
+	            moreresults
+	            result=result
+	            target="dialog_connect_loop_results" 
+				template="_action_dialog_connect_tab_find_results_loop.tpl"
                 is_result_render
-				visible}
-	%}
-    {% javascript %}$.dialogReposition();{% endjavascript %}
-{% endwith %}
+				visible
+			}
+        %}
+    {% endwith %}
 </div>
