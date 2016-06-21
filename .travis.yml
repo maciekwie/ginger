@@ -1,3 +1,7 @@
+language: erlang
+otp_release:
+    - 18.3
+
 cache:
     directories:
         - /tmp/cached/
