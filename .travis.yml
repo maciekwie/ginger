@@ -13,26 +13,11 @@ before_install:
 
 script: true
 
-after_success:
-    # Install Go and splitsh
-    - eval "$(curl -sL https://raw.githubusercontent.com/travis-ci/gimme/master/gimme | GIMME_GO_VERSION=1.4 bash)"
-    - export GOPATH=$HOME/gopath
-    - go get -d github.com/libgit2/git2go
-    - cd $GOPATH/src/github.com/libgit2/git2go
-    - git checkout next
-    - git submodule update --init
-    - make install
-    - go get github.com/splitsh/lite
-    - go build -o ~/bin/splitsh-lite github.com/splitsh/lite
-
-    - cp /tmp/cached/splitsh.db .git/splitsh.db || true
-
-    # Clone again to overcome limited cloning depth on Travis
-    - git clone https://github.com/$TRAVIS_REPO_SLUG.git /tmp/ginger
-    - cd /tmp/ginger
-
-    - SHA1=`splitsh-lite --prefix=modules/mod_ginger_base/`
-    - git push git@github.com:driebit/mod_ginger_base.git $SHA1:refs/heads/master
+deploy:
+    provider: script
+    script: scripts/split.sh
+#    on:
+#        branch: master
 
 before_cache:
     - mv .git/splitsh.db /tmp/cached/
