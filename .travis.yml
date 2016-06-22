@@ -16,7 +16,8 @@ script: true
 deploy:
     provider: script
     script: scripts/split.sh
-#    on:
+    on:
+        all_branches: true
 #        branch: master
 
 before_cache:
