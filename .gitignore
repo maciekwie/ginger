@@ -5,6 +5,7 @@ sites/*
 modules/mod_alternative_uris
 modules/mod_am_default
 modules/mod_filmfonds_allotment
+modules/mod_elasticsearch
 modules/mod_geo
 modules/mod_ginger_auth/templates/_logon_box.tpl
 modules/mod_import_anymeta
