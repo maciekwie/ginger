@@ -10,9 +10,17 @@ services:
         working_dir: /data
 
     elasticsearch:
-        image: elasticsearch
+        image: elasticsearch:2.4
         ports:
             - 9200:9200
+
+    logstash:
+        image: logstash:2.4
+        links:
+            - elasticsearch
+        command: -f /etc/logstash/syslog.conf
+        volumes:
+              - ./logstash/:/etc/logstash
 
     kibana:
         image: driebit/kibana-sense
@@ -26,7 +34,7 @@ services:
         privileged: true
         links:
             - postgres
-            - elasticsearch
+            - logstash
         volumes:
             - ./modules:/opt/zotonic/user/modules
             - ./sites:/opt/zotonic/user/sites
