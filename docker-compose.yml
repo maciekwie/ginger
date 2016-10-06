@@ -18,7 +18,7 @@ services:
         image: logstash:2.4
         links:
             - elasticsearch
-        command: -f /etc/logstash/syslog.conf
+        command: -f /etc/logstash/json.conf
         volumes:
               - ./logstash/:/etc/logstash
 
