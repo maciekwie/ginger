@@ -27,7 +27,9 @@
 {% endif %}
 
 {% if m.modules.active.mod_ginger_remark %}
-    <div id="remarks" class="main-content__remarks">
-        {% include "_remarks.tpl" %}
-    </div>
+    {% if id.category.feature_enable_comments|default:`true` %}
+        <div id="remarks" class="main-content__remarks">
+            {% include "_remarks.tpl" %}
+        </div>
+    {% endif %}
 {% endif %}
