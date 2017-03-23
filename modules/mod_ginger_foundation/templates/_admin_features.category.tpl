@@ -1,7 +1,7 @@
 <div class="col-md-12">
     <div class="checkbox">
         <label>
-            <input value="1" type="checkbox"
+               <input value="1" type="checkbox" id="{{ #feature_enable_comments }}"
                 name="feature_enable_comments"
                 {% if id.feature_enable_comments|if_undefined:`true` %}checked{% endif %}
             />
